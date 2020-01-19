@@ -1,8 +1,4 @@
 pullreq
 =======
 
-Hello, Pull Request
-master
-プルリク勉強用
-
-test master
+This is a learning repository for pull requests, git and github, etc.
