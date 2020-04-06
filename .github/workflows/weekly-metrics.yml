@@ -9,11 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Get tag count
       with:
         start_date: $(date "+%Y%m%d" -d '1 week ago')
         end_date: $(date "+%Y%m%d" -d '1 days ago')
+
+    - name: Get tag count
       run: |
         echo Hello
         git fetch
