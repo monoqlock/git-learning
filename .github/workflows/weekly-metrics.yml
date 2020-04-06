@@ -13,7 +13,9 @@ jobs:
       run: |
         echo Hello
         git fetch
-        echo $(date "+%Y%m%d" -d '1 week ago')
-        echo $(date "+%Y%m%d" -d '1 days ago')
-        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$(date "+%Y%m%d" -d \'1 days ago\') && $1>=$(date "+%Y%m%d" -d \'1 week ago\')'
+        start_date=$(date "+%Y%m%d" -d '1 week ago')
+        echo $start_date
+        end_date=$(date "+%Y%m%d" -d '1 days ago')
+        echo $end_date
+        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$end_date && $1>=$start_date'
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
