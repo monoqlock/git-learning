@@ -8,16 +8,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        start_date: $(date "+%Y%m%d" -d '1 week ago')
-        end_date: $(date "+%Y%m%d" -d '1 days ago')
-
-    - name: Get tag count
-      run: |
-        echo Hello
-        git fetch
-        echo $INPUT_START_DATE
-        echo $INPUT_END_DATE
-        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$INPUT_END_DATE && $1>=$INPUT_START_DATE'
-        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
+      - name: Get tag count
+        uses: actions/checkout@v2
+        with:
+          start_date: $(date "+%Y%m%d" -d '1 week ago')
+          end_date: $(date "+%Y%m%d" -d '1 days ago')
+        run: |
+          echo Hello
+          git fetch
+          echo $INPUT_START_DATE
+          echo $INPUT_END_DATE
+          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$INPUT_END_DATE && $1>=$INPUT_START_DATE'
+          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
