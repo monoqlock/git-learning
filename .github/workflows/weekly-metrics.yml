@@ -8,27 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
+    - uses: actions/checkout@v2
     - name: Get tag count
-      uses: actions/checkout@v2
-    - run: |
+      run: |
         echo Hello
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119'
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
-
-    - uses: actions/github-script@0.9.0
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          console.log("-----start");
-          const releases = await github.repos.listReleases({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-          });
-          console.log(releases);
-          console.log("-----end");
-
-
