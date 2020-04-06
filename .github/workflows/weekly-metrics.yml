@@ -9,13 +9,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Get tag count
+      with:
+        start_date: $(date "+%Y%m%d" -d '1 week ago')
+        end_date: $(date "+%Y%m%d" -d '1 days ago')
       run: |
         echo Hello
         git fetch
-        start_date=$(date "+%Y%m%d" -d '1 week ago')
-        echo $start_date
-        end_date=$(date "+%Y%m%d" -d '1 days ago')
-        echo $end_date
-        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$end_date && $1>=$start_date'
+        echo $INPUT_START_DATE
+        echo $INPUT_END_DATE
+        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$INPUT_END_DATE && $1>=$INPUT_START_DATE'
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
