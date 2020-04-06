@@ -17,6 +17,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
+            console.log(releases);
             console.log(releases.data);
             const filteredRelease = releases
               .data
