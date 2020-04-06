@@ -13,6 +13,7 @@ jobs:
       run: |
         echo Hello
         git fetch
-        git branch
-        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119'
+        echo $(date "+%Y%m%d" -d '1 week ago')
+        echo $(date "+%Y%m%d" -d '1 days ago')
+        git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$(date "+%Y%m%d" -d \'1 days ago\') && $1>=$(date "+%Y%m%d" -d \'1 week ago\')'
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
