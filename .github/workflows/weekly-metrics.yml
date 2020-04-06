@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get tag count
+        run: |
+          echo Hello
+          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119'
+          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
       - uses: actions/github-script@0.9.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -18,13 +23,6 @@ jobs:
               repo: context.repo.repo,
             });
             console.log(releases);
-            console.log(releases.data);
-            const filteredRelease = releases
-              .data
-              .filter(release => !release.draft && !release.prerelease)
-              .map(release => release.tag_name);
-            console.log("-----filteredRelease");
-            console.log(filteredRelease);
             console.log("-----end");
 
 
