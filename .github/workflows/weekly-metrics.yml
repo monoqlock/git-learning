@@ -13,6 +13,7 @@ jobs:
       run: echo Hello, world!
 
     - name: Get tag count
+      uses: actions/checkout@v2
       run: |
         echo Hello
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119'
