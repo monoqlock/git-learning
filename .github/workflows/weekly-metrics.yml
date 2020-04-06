@@ -14,6 +14,5 @@ jobs:
         echo Hello
         git fetch
         git branch
-        git tag --sort=-taggerdate | head -n 10
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119'
         git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
