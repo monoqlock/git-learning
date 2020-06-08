@@ -2,6 +2,7 @@ name: Weekly Metrics
 
 on:
   push:
+    branches: [ master ]
 
 jobs:
   count:
