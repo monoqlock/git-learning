@@ -6,15 +6,12 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ develop ]
+#  pull_request:
+#    branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  validate-migration:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -25,6 +22,17 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run a one-line script
       run: echo Hello, world!
+
+    - name: Migrate using flyway
+      run:
+        docker run --rm -v ${PWD}/sql:/flyway/sql flyway/flyway -url=jdbc:h2:mem:test -user=sa migrate
+
+    - name: Set up flyway
+      uses: docker://flyway/flyway:latest
+      run: echo Hello, world!
+
+    - name: flyway check
+      run: flyway info
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
