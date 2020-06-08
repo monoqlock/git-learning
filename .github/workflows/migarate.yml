@@ -29,7 +29,6 @@ jobs:
 
     - name: Set up flyway
       uses: docker://flyway/flyway:latest
-      run: echo Hello, world!
 
     - name: flyway check
       run: flyway info
