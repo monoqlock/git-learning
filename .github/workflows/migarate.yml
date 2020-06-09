@@ -21,4 +21,4 @@ jobs:
 
     - name: Migrate using flyway
       run:
-        docker run --rm -v ${PWD}/sql:/flyway/sql flyway/flyway -url=jdbc:h2:mem:test -user=sa validate
+        docker run --rm -v ${PWD}/sql:/flyway/sql flyway/flyway -url=jdbc:h2:mem:test -user=sa validate -ignorePendingMigrations=true -validateMigrationNaming=true
