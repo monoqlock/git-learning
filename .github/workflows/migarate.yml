@@ -15,4 +15,4 @@ jobs:
 
     - name: Flyway validate
       run:
-        docker run --rm -v ${PWD}/sql:/flyway/sql flyway/flyway -url=jdbc:h2:mem:test -user=sa validate -ignorePendingMigrations=true -validateMigrationNaming=true
+        docker run --rm -v ${PWD}/sql:/flyway/sql flyway/flyway -url=jdbc:h2:mem:dummy -user=sa validate -ignorePendingMigrations=true -validateMigrationNaming=true
