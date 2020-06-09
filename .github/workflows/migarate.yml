@@ -21,7 +21,9 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      run: echo Hello, world!
+      run: |
+        echo Hello, world!
+        echo ${PWD}
 
     - name: Migrate using flyway
       run:
@@ -30,11 +32,5 @@ jobs:
     - name: Set up flyway
       uses: docker://flyway/flyway:latest
 
-    - name: flyway check
-      run: flyway info
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    #- name: flyway check
+    #  run: flyway info
