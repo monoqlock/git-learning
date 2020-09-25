@@ -2,13 +2,9 @@
 
 name: CI
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
-#  push:
-#    branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
+  push:
+    branches: !master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,8 +22,12 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Set tag name to env
+      run: echo "::set-env name=release_tag_name::$(TZ=UTC date '+%Y%m%d_%H%M')"
+
+    - name: Changelog
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        docker run -it --rm -v "$(pwd)":/usr/local/src/your-app ferrarimarco/github-changelog-generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o
+      id: Changelog
