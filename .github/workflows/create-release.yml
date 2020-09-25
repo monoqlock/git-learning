@@ -12,7 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: test
-        run: echo $(TZ=UTC date '+%Y%m%d_%H%M')
+        env:
+          t_name: $(TZ=UTC date '+%Y%m%d_%H%M')
+        run: echo $t_name
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -20,8 +22,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           release_tag_name: $(TZ=UTC date '+%Y%m%d_%H%M')
         with:
-          tag_name: 20200923_1100
-          release_name: 20200923_1100
+          tag_name: $release_tag_name
+          release_name: $release_tag_name
           body: |
             Changes in this Release
             - First Change
