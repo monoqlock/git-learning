@@ -19,5 +19,3 @@ jobs:
           git fetch
           echo $start_date
           echo $end_date
-          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=$end_date && $1>=$start_date'
-          git tag --sort=-taggerdate --format '%(taggerdate:format:%Y%m%d)' | awk '$1<=20200406 && $1>=20200119' | wc -l
