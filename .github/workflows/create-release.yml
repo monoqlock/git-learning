@@ -1,0 +1,30 @@
+name: Create release
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: test
+        run: echo $(TZ=UTC date '+%Y%m%d_%H%M')
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          release_tag_name: $(TZ=UTC date '+%Y%m%d_%H%M')
+        with:
+          tag_name: 20200923_1100
+          release_name: 20200923_1100
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
