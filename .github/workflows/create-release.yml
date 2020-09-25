@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: test
+        run: echo $(TZ=UTC date '+%Y%m%d_%H%M')
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
