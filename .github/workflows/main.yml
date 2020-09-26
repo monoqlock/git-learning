@@ -21,20 +21,19 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-    - name: Set tag name to env
-      run: echo "::set-env name=release_tag_name::$(TZ=UTC date '+%Y%m%d_%H%M')"
+#    - name: Set tag name to env
+#      run: echo "::set-env name=release_tag_name::$(TZ=UTC date '+%Y%m%d_%H%M')"
 
-    - name: Install ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.7'
-
-    - name: Create changelog
-      id: Changelog
-      run: |
-        gem install github_changelog_generator
-        github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
-#        echo "::set-output name=note::$()"
-
-    - name: test output
-      run: cat ./CHANGELOG.md
+#    - name: Install ruby
+#      uses: actions/setup-ruby@v1
+#      with:
+#        ruby-version: '2.7'
+#
+#    - name: Create changelog
+#      id: Changelog
+#      run: |
+#        gem install github_changelog_generator
+#        github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
+#
+#    - name: test output
+#      run: cat ./CHANGELOG.md
