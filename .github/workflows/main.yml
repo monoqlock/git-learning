@@ -33,4 +33,7 @@ jobs:
       run: |
         gem install github_changelog_generator
         github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o
+        echo ::set-env name=FOO::$(echo -n "hello world")
       id: Changelog
+
+    - run: echo "${{ steps.Changelog.outputs.FOO }}"
