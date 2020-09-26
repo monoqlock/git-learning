@@ -1,7 +1,7 @@
 name: Create release
 
 on:
-  pull_request:
+  push:
     branches: master
 
 jobs:
@@ -24,7 +24,8 @@ jobs:
       - name: Create changelog
         run: |
           gem install github_changelog_generator
-          github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --header-label "" --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
+          github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} \
+            --header-label "" --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
         id: Changelog
 
       - name: Create Release
