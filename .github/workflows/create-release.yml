@@ -2,22 +2,32 @@ name: Create release
 
 on:
   push:
-    branches: [ develop ]
+    branches: master
 
 jobs:
   create-release:
-    name: Create Release
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set tag name to env
         run: echo "::set-env name=release_tag_name::$(TZ=UTC date '+%Y%m%d_%H%M')"
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
+
+      - name: Install ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Create changelog
+        run: |
+          gem install github_changelog_generator
+          github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} \
+            --header-label "" --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
         id: Changelog
-        env:
-          REPO: ${{ github.repository }}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -26,7 +36,6 @@ jobs:
         with:
           tag_name: ${{ env.release_tag_name }}
           release_name: ${{ env.release_tag_name }}
-          body: |
-            ${{ steps.Changelog.outputs.changelog }}
+          body_path: ./CHANGELOG.md
           draft: false
           prerelease: false
