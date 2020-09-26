@@ -33,7 +33,8 @@ jobs:
       id: Changelog
       run: |
         gem install github_changelog_generator
-        echo "::set-output name=note::$(github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o)"
+        github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o ./CHANGELOG.md
+#        echo "::set-output name=note::$()"
 
     - name: test output
-      run: echo "${{ steps.Changelog.outputs.note }}"
+      run: cat ./CHANGELOG.md
