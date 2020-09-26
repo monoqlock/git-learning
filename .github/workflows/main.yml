@@ -30,7 +30,7 @@ jobs:
         ruby-version: '2.7'
 
     - name: Create changelog
-    - run: |
+      run: |
         gem install github_changelog_generator
         github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o
       id: Changelog
