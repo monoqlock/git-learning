@@ -26,7 +26,7 @@ jobs:
 
     - name: Changelog from ruby
       uses: actions/setup-ruby@v1
-      run: |
+    - run: |
         gem install github_changelog_generator
         github_changelog_generator -u monoqlock -p git-learning --unreleased-only --future-release ${{ env.release_tag_name }} --token ${{ secrets.GITHUB_TOKEN }} -o
 
