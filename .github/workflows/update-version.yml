@@ -20,7 +20,7 @@ jobs:
 
       - name: Update version
         run: |
-          sed -e 's/\"VERSION\":.*\"/\"VERSION\": \"${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ env.PATCH_VERSION }}\"/' src/configs/default.json
+          sed -i -e 's/\"VERSION\":.*\"/\"VERSION\": \"${{ env.MAJOR_VERSION }}.${{ env.MINOR_VERSION }}.${{ env.PATCH_VERSION }}\"/' src/configs/default.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
