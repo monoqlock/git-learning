@@ -14,12 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set tag name to env
-        run: echo "RELEASE_TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      - name: Check
-        run: echo RELEASE_TAG_NAME="${{ env.RELEASE_TAG_NAME }}"
-
       - name: Install ruby
         uses: actions/setup-ruby@v1
         with:

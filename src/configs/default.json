@@ -1,0 +1,12 @@
+{
+  "VERSION": "1.199.0",
+  "LOCAL_REFRESH_VERSION": "1.0.0",
+  "REGION": "Japan",
+
+  "AUTO_LOGIN": false,
+  "DEBUG": false,
+
+  "BUGSNAG": {
+    "KEY": "hoge"
+  }
+}
