@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  count:
+  update-version:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +20,7 @@ jobs:
           title: 'Update version'
           branch: update-version
           base: master
-          labels: リリース時動作確認不要
+          commit-message: Update version
+          committer: GitHub <noreply@github.com>
           reviewers: ${{ github.actor }}
+          labels: リリース時動作確認不要
