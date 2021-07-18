@@ -3,6 +3,7 @@ name: Update Version
 on:
   push:
     tags:
+      - '*'
 
 jobs:
   update-version:
