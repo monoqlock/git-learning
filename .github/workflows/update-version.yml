@@ -1,0 +1,26 @@
+name: Update Version
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Make changes to pull request
+        run: date +%s > date.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Update version'
+          branch: update-version
+          base: master
+          labels: リリース時動作確認不要
+          reviewers: ${{ github.actor }}
