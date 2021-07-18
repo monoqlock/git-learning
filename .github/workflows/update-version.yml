@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update version'
-          branch: update-version-"$(TZ=UTC date '+%s')"
+          branch: update-version
           base: master
           commit-message: Update version
           committer: GitHub <noreply@github.com>
