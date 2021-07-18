@@ -29,7 +29,7 @@ jobs:
         run: |
           gem install github_changelog_generator
           github_changelog_generator --user monoqlock --project git-learning --unreleased-only \
-            --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
+            --token ${{ secrets.GITHUB_TOKEN }} --release-branch master --output ./CHANGELOG.md
 
       - name: Create Release
         uses: ncipollo/release-action@v1
