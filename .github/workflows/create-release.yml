@@ -2,7 +2,8 @@ name: Create release
 
 on:
   push:
-    branches: master
+    tags:
+      - '*'
 
 jobs:
   create-release:
@@ -14,26 +15,28 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set tag name to env
-        run: echo "::set-env name=RELEASE_TAG_NAME::$(TZ=UTC date '+%Y%m%d_%H%M')"
+        run:
+          echo "${GITHUB_REF#refs/tags/}" \
+          echo "::set-env name=TAG_NAME::${GITHUB_REF#refs/tags/}
 
-      - name: Install ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
+#      - name: Install ruby
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: '2.7'
 
-      - name: Create changelog
-        run: |
-          gem install github_changelog_generator
-          github_changelog_generator --user monoqlock --project git-learning --unreleased-only --future-release ${{ env.RELEASE_TAG_NAME }} \
-            --header-label "" --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
-
-      - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG_NAME }}
-          release_name: ${{ env.RELEASE_TAG_NAME }}
-          body_path: ./CHANGELOG.md
-          draft: false
-          prerelease: false
+#      - name: Create changelog
+#        run: |
+#          gem install github_changelog_generator
+#          github_changelog_generator --user monoqlock --project git-learning --unreleased-only --future-release ${{ env.RELEASE_TAG_NAME }} \
+#            --header-label "" --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
+#
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ env.RELEASE_TAG_NAME }}
+#          release_name: ${{ env.RELEASE_TAG_NAME }}
+#          body_path: ./CHANGELOG.md
+#          draft: false
+#          prerelease: false
