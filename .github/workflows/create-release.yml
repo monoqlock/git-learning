@@ -28,7 +28,7 @@ jobs:
       - name: Create changelog
         run: |
           gem install github_changelog_generator
-          github_changelog_generator --user monoqlock --project git-learning --unreleased-only \
+          github_changelog_generator --user monoqlock --project git-learning --max-issues 100 --unreleased-only \
             --token ${{ secrets.GITHUB_TOKEN }} --release-branch master --output ./CHANGELOG.md
 
       - name: Create Release
