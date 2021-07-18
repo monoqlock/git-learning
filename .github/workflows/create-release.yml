@@ -22,7 +22,7 @@ jobs:
       - name: Create changelog
         run: |
           gem install github_changelog_generator
-          github_changelog_generator --user monoqlock --project git-learning --header-label "" \
+          github_changelog_generator --user monoqlock --project git-learning --header-label "\n" \
             --release-branch master --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
 
       - name: Create Release
