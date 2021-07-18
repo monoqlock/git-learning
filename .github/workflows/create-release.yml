@@ -28,7 +28,7 @@ jobs:
       - name: Create changelog
         run: |
           gem install github_changelog_generator
-          github_changelog_generator --user monoqlock --project git-learning --unreleased-only \
+          github_changelog_generator --user monoqlock --project git-learning \
             --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
 
       - name: Check md
