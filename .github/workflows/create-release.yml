@@ -35,12 +35,17 @@ jobs:
         run: cat ./CHANGELOG.md
 
       - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ env.RELEASE_TAG_NAME }}
-          release_name: ${{ env.RELEASE_TAG_NAME }}
-          body_path: ./CHANGELOG.md
+          bodyFile: "./CHANGELOG.md"
           draft: true
-          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ env.RELEASE_TAG_NAME }}
+#          release_name: ${{ env.RELEASE_TAG_NAME }}
+#          body_path: ./CHANGELOG.md
+#          draft: true
+#          prerelease: false
