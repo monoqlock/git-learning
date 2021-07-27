@@ -15,8 +15,10 @@ jobs:
 
       - name: Set previous tag to env
         env:
-          LAST_COMMIT: $(git rev-list --tags --skip=1 --max-count=1)
-        run: echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags $LAST_COMMIT" >> $GITHUB_ENV
+          last_commit: $(git rev-list --tags --skip=1 --max-count=1)
+        run: |
+          echo $last_commit
+          echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags ${{last_commit}}" >> $GITHUB_ENV
 
       - name: Set release tag to env
         run: echo "RELEASE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
