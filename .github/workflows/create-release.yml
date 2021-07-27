@@ -1,9 +1,6 @@
 name: Create release
 
-on:
-  push:
-    tags:
-      - '*'
+on: workflow_dispatch
 
 jobs:
   create-release:
@@ -14,20 +11,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install ruby
-        uses: actions/setup-ruby@v1
+      - name: Set previous tag to env
+        run: echo "PREVIOUS_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Set release tag to env
+        run: echo "RELEASE_TAG=$(TZ=UTC date '+%Y%m%d_%H%M')" >> $GITHUB_ENV
+
+      - name: Install go
+        uses: actions/actions/setup-go@v2
         with:
-          ruby-version: '2.7'
+          go-version: '1.16'
 
       - name: Create changelog
         run: |
-          gem install github_changelog_generator
-          github_changelog_generator --user monoqlock --project git-learning \
-            --release-branch master --token ${{ secrets.GITHUB_TOKEN }} --output ./CHANGELOG.md
+          go get github.com/Songmu/ghch/cmd/ghch
+          ghch -r cmp-server --token=${{ secrets.GITHUB_TOKEN }} --from=${{ env.PREVIOUS_TAG }} --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           bodyFile: "./CHANGELOG.md"
+          commit: main
+          tag: ${{ env.RELEASE_TAG }}
           draft: true
           token: ${{ secrets.GITHUB_TOKEN }}
