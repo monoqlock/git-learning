@@ -15,7 +15,7 @@ jobs:
 
       - name: Set previous tag to env
         run: |
-          echo "PREVIOUS_COMMIT=$(git rev-list --tags --skip=1 --max-count=1)" >> $GITHUB_ENV
+          echo "PREVIOUS_COMMIT=$(git log -n 1 --pretty=%h)" >> $GITHUB_ENV
           echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags ${{ env.PREVIOUS_COMMIT }})" >> $GITHUB_ENV
 
       - name: Set release tag to env
