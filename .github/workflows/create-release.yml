@@ -28,7 +28,7 @@ jobs:
       - name: Create changelog
         run: |
           go get github.com/Songmu/ghch/cmd/ghch
-          ghch -r cmp-server --token=${{ secrets.GITHUB_TOKEN }} --from=${{ steps.previoustag.outputs.tag }} \
+          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ steps.previoustag.outputs.tag }} \
             --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
 
       - name: Create Release
