@@ -13,12 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get Previous tag
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
+      - name: Set release tag to env
+        run: echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_ENV
 
       - name: Set release tag to env
-        run: echo "RELEASE_TAG==${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "RELEASE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Install go
         uses: actions/setup-go@v2
@@ -28,7 +27,7 @@ jobs:
       - name: Create changelog
         run: |
           go get github.com/Songmu/ghch/cmd/ghch
-          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ steps.previoustag.outputs.tag }} \
+          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ env.PREVIOUS_TAG }} --to=${{ env.RELEASE_TAG }}\
             --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
 
       - name: Create Release
