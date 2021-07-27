@@ -30,8 +30,8 @@ jobs:
       - name: Create changelog
         run: |
           go get github.com/Songmu/ghch/cmd/ghch
-          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ env.PREVIOUS_TAG }} --to=${{ env.RELEASE_TAG }}\
-            --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
+          #ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ env.PREVIOUS_TAG }} --to=${{ env.RELEASE_TAG }} --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
+          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=20210718_0708 --to=${{ env.RELEASE_TAG }} --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
 
       - name: Create Release
         uses: ncipollo/release-action@v1
