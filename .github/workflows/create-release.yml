@@ -2,8 +2,6 @@ name: Create release
 
 on:
   push:
-    tags:
-      - '*'
 
 jobs:
   create-release:
@@ -12,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Get Previous tag
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
+#      - name: Get Previous tag
+#        id: previoustag
+#        uses: WyriHaximus/github-action-get-previous-tag@v1
 
       - name: Set release tag to env
         run: echo "RELEASE_TAG==${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
