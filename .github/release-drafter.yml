@@ -1,4 +1,4 @@
-name-template: 'v$RESOLVED_VERSION 🌈'
+name-template: 'Next Release title'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
@@ -29,3 +29,5 @@ template: |
   ## Changes
 
   $CHANGES
+
+  [Comparing Changes](https://github.com/monoqlock/git-learning/compare/$PREVIOUS_TAG...HEAD)
