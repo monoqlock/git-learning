@@ -1,5 +1,3 @@
-name-template: 'Next release title'
-tag-template: '%Y%m%d_%H%M'
 categories:
   - title: '🚀 Features'
     labels:
@@ -9,9 +7,10 @@ categories:
     labels:
       - 'fix'
       - 'bugfix'
-      - 'bug'
-  - title: '🧰 Maintenance'
-    label: 'chore'
+      - 'bugsnag'
+  - title: 'リリース時動作確認不要'
+    labels:
+      - 'リリース時動作確認不要'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
@@ -31,4 +30,7 @@ template: |
   $CHANGES
 
   [Comparing Changes](https://github.com/monoqlock/git-learning/compare/$PREVIOUS_TAG...HEAD)
-  ${{ env.RELEASE_COMMIT }}
+
+  <!-- 定型作業以外のリリース作業が発生する場合はリンクを追加
+  ## リリース手順
+  -->
