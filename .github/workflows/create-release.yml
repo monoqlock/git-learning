@@ -21,6 +21,6 @@ jobs:
           config-name: release-drafter.yml
           name: ${{ env.RELEASE_NAME }}
           tag: ${{ env.RELEASE_NAME }}
-          commitish: $GITHUB_SHA
+          commitish: ${GITHUB_SHA}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
