@@ -1,5 +1,5 @@
-name-template: 'Next Release title'
-tag-template: 'v$RESOLVED_VERSION'
+name-template: 'Next release title'
+tag-template: '%Y%m%d_%H%M'
 categories:
   - title: '🚀 Features'
     labels:
