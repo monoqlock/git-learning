@@ -31,3 +31,4 @@ template: |
   $CHANGES
 
   [Comparing Changes](https://github.com/monoqlock/git-learning/compare/$PREVIOUS_TAG...HEAD)
+  ${{ env.RELEASE_COMMIT }}
