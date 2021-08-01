@@ -25,11 +25,10 @@ version-resolver:
       - 'patch'
   default: patch
 template: |
+  [Comparing Changes](https://github.com/monoqlock/git-learning/compare/$PREVIOUS_TAG...HEAD)
   ## Changes
 
   $CHANGES
-
-  [Comparing Changes](https://github.com/monoqlock/git-learning/compare/$PREVIOUS_TAG...HEAD)
 
   <!-- 定型作業以外のリリース作業が発生する場合はリンクを追加
   ## リリース手順

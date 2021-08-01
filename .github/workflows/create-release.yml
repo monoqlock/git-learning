@@ -11,10 +11,8 @@ jobs:
   release-drafter:
     runs-on: ubuntu-latest
 
-
-
     steps:
-      - name: Set release tag to env
+      - name: Set release name to env
         run: echo "RELEASE_NAME=$(TZ=UTC date '+%Y%m%d_%H%M')" >> $GITHUB_ENV
 
       - name: Update draft release
@@ -23,40 +21,6 @@ jobs:
           config-name: release-drafter.yml
           name: ${{ env.RELEASE_NAME }}
           tag: ${{ env.RELEASE_NAME }}
-          version: verion_test
+          commitish: $GITHUB_SHA
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set previous tag to env
-#        run: |
-#          #echo "PREVIOUS_COMMIT=$(git log --skip=1 --max-count=1 --pretty=%h)" >> $GITHUB_ENV
-#          #echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags ${{ env.PREVIOUS_COMMIT }})" >> $GITHUB_ENV
-#          echo "PREVIOUS_TAG=20210718_0708" >> $GITHUB_ENV
-#
-
-#
-#      - name: Install go
-#        uses: actions/setup-go@v2
-#        with:
-#          go-version: '1.16'
-#
-#      - name: Create changelog
-#        run: |
-#          go get github.com/Songmu/ghch/cmd/ghch
-#          #ghch --token=${{ secrets.GITHUB_TOKEN }} --from=${{ env.PREVIOUS_TAG }} --to=${{ env.RELEASE_TAG }} --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
-#          ghch --token=${{ secrets.GITHUB_TOKEN }} --from=20210718_0708 --to=${{ env.RELEASE_TAG }} --next-version=${{ env.RELEASE_TAG }} --format=markdown > ./CHANGELOG.md
-#
-#      - name: Create Release
-#        uses: ncipollo/release-action@v1
-#        with:
-#          bodyFile: "./CHANGELOG.md"
-#          commit: master
-#          tag: ${{ env.RELEASE_TAG }}
-#          draft: true
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#
-#
