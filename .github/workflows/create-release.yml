@@ -13,7 +13,9 @@ jobs:
 
     steps:
       - name: Set release name to env
-        run: echo "RELEASE_NAME=$(TZ=UTC date '+%Y%m%d_%H%M')" >> $GITHUB_ENV
+        run: |
+          echo "RELEASE_NAME=$(TZ=UTC date '+%Y%m%d_%H%M')" >> $GITHUB_ENV
+          echo ${GITHUB_SHA}
 
       - name: Update draft release
         uses: release-drafter/release-drafter@v5
@@ -21,6 +23,6 @@ jobs:
           config-name: release-drafter.yml
           name: ${{ env.RELEASE_NAME }}
           tag: ${{ env.RELEASE_NAME }}
-          commitish: ${GITHUB_SHA}
+          commitish: 7515c4d
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
